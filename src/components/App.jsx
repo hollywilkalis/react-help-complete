@@ -8,7 +8,9 @@ import Moment from 'moment';
 import Admin from './Admin';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import c from './../constants';
+import constants from './../../src/constants';
+const { c } = constants;
+import * as actions from './../actions';
 
 class App extends React.Component {
 
@@ -17,6 +19,12 @@ class App extends React.Component {
       this.updateTicketElapsedWaitTime(),
     6000
     );
+  }
+
+  componentWillMount() {
+    const { dispatch } = this.props;
+    const { watchFirebaseTicketsRef } = actions;
+    dispatch(watchFirebaseTicketsRef());
   }
 
   componentWillUnmount(){
